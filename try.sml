@@ -1,2 +1,0 @@
-
-fun karatsuba A B = []
