@@ -18,6 +18,8 @@ fun fromString s =
 		end
 	end
 
+
+
 fun create ([],cur,inc)=[]
 	| create (l,cur,inc) = 
 		let
