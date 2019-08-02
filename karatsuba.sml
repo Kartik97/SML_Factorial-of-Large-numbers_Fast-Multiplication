@@ -31,7 +31,7 @@ fun multiply (A,B,l) =
 	else if (l=1) then singleMultiply(A,B)
 		 else let val (xl,xr) = sublist(A,l,0); val (yl,yr) = sublist(B,l,0)
 		 		  val (a,c) = make(xl,yl); val (b,d) = make(xr,yr)
-		 	  in let
+	 		  in let
 		 	  		val p1 = multiply(a,c,l div 2); val p2 = multiply(b,d, l div 2 + l mod 2); 
 		 	  		val (h1,h2) = make(xl,xr); val (j1,j2) = make(yl,yr);
 		 	  		val res1 = add(reverse(h1),reverse(h2),0); val res2 = add(reverse(j1),reverse(j2),0) ; 
