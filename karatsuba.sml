@@ -23,26 +23,23 @@ fun final (A,B,C,l) =
 		val added = add(reverse(P1),reverse(P2),0)
 		val (F,S) = make(added,p_p3)
 	in
-		if(s = 1) then 
-				let val (fs,fv)=sub(F,S) 
-				in fv 
-				end
-		else add(reverse(F),reverse(S),0)			
-		
+		 add(reverse(F),reverse(S),0)			
 	end
 
 fun multiply (A,B,l) = 
 	if(l=0) then []
 	else if (l=1) then singleMultiply(A,B)
-		 else let val (a,b) = sublist(A,l,0); val (c,d) = sublist(B,l,0)
-		 		  val (a,b) = make(a,b); val (c,d) = make(c,d)
+		 else let val (xl,xr) = sublist(A,l,0); val (yl,yr) = sublist(B,l,0)
+		 		  val (a,c) = make(xl,yl); val (b,d) = make(xr,yr)
 		 	  in let
-		 	  		val p1 = multiply(a,c,l div 2); val p2 = multiply(b,d, l div 2 + l mod 2); val res1 = add(reverse(a),reverse(b),0); val res2 = add(reverse(c),reverse(d),0) ; 
+		 	  		val p1 = multiply(a,c,l div 2); val p2 = multiply(b,d, l div 2 + l mod 2); 
+		 	  		val (h1,h2) = make(xl,xr); val (j1,j2) = make(yl,yr);
+		 	  		val res1 = add(reverse(h1),reverse(h2),0); val res2 = add(reverse(j1),reverse(j2),0) ; 
 		 	  		val (n1,n2) = make(res1,res2);
 		 			val p3=multiply(n1,n2, length(n1));
 		 			val (e1,e2,e3) = equated(p1,p2,p3)
 			 	  in
-			 	  	 final(e1,e2,e3,l)
+			 	  	final(e1,e2,e3,l)
 			 	  end
 		 	  end
 
