@@ -14,10 +14,11 @@ fun equated(A,B,C) =
 
 fun final (A,B,C,l) = 
 	let
+		val z = (l div 2) + (l mod 2)
 		val (C,AB) = make(C,add(reverse(A),reverse(B),0))
 		val (s,v) = sub(C,AB);
-		val p_p1= A @ pad l;
-		val p_p3 = v @ pad (l div 2)
+		val p_p1= A @ pad (2 * z);
+		val p_p3 = v @ pad z
 		val (P1,P2) = make(p_p1,B)
 		val added = add(reverse(P1),reverse(P2),0)
 		val (F,S) = make(added,p_p3)
@@ -36,7 +37,7 @@ fun multiply (A,B,l) =
 		 else let val (a,b) = sublist(A,l,0); val (c,d) = sublist(B,l,0)
 		 		  val (a,b) = make(a,b); val (c,d) = make(c,d)
 		 	  in let
-		 	  		val p1 = multiply(a,c,l div 2); val p2 = multiply(b,d, l div 2 + l mod 2); val res1 = add(a,b,0); val res2 = add(c,d,0) ; 
+		 	  		val p1 = multiply(a,c,l div 2); val p2 = multiply(b,d, l div 2 + l mod 2); val res1 = add(reverse(a),reverse(b),0); val res2 = add(reverse(c),reverse(d),0) ; 
 		 	  		val (n1,n2) = make(res1,res2);
 		 			val p3=multiply(n1,n2, length(n1));
 		 			val (e1,e2,e3) = equated(p1,p2,p3)
