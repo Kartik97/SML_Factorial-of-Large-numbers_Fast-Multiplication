@@ -26,10 +26,24 @@ fun create ([],cur,inc)=[]
 			if (trim(cmp) = [0] ) then [karatsuba l] else (karatsuba cur) :: create(l,add(reverse(cur),reverse(inc),0),inc)
 		end
 
+fun apply ([],start) = start
+	| apply (x::l,start) = 
+		let
+		 	val temp = x start
+		 in
+		 	apply (l,temp)
+		 end 
+
 fun factorial str =
 	let
-		val (v1,v2) = (make(fromString(str),[1]))
-		val n = create (v1,v2,v2)
+		val (v1,v2) = (make(fromString(str),[1]))	 
+		val n = if ( v1 = [0] ) then [] else create (v1,v2,v2)
 	in
-		n	
+		if (v1 = [0]) then [1]
+		else
+			let
+				val applied = apply(n,v2)
+			in
+				applied
+			end	
 	end
