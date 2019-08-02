@@ -26,3 +26,10 @@ fun add([],[],cy) = if (cy=0) then [] else [cy]
 		let val l = add(A,B,(x+y+cy) div 10000) in l @ [(x+y+cy) mod 10000 ] end
 
 fun sub(A,B) = if (bigger(A,B)) then (0,act(reverse(A),reverse(B),0)) else (1,act(reverse(B),reverse(A),0))
+
+
+	fun karatsuba A B = 
+	let val l1=length(A) and l2=length(B) 
+	in if(l1>l2) then multiply(A,makeEqual(B,l1-l2),l1)
+			else multiply(makeEqual(A,l2-l1),B,l2)
+	end
