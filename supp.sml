@@ -14,5 +14,5 @@ fun singleMultiply(x::A,y::B) = if (x*y = 0) then [0] else splitMul(x*y)
 fun sublist ([],len,cur) = ([],[])
 	| sublist(x::A,len,cur) = 
 		let val (m,n) = sublist(A,len,cur+1)
-		in if (cur<len div 2) then (x::m,n) else (m,x::n)
+		in if (cur< (len div 2)) then (x::m,n) else (m,x::n)
 		end
