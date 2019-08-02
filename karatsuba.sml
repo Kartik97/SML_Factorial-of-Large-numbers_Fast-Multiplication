@@ -1,5 +1,53 @@
-use "supp.sml";
-use "extra.sml";
+(* Helper Functions *)
+(*---------------------------------------------------------------------------------------------*)
+
+fun length [] = 0
+	| length (x::rest) = 1+length(rest)
+
+fun makeEqual (l,x) = if x>0 then makeEqual(0::l,x-1) else l 
+
+fun make(A,B) = if (length A > length B) then (A,makeEqual (B,length(A)-length(B))) else (makeEqual(A,length(B)-length(A)),B)
+
+fun splitMul n = 
+	if n=0 then []
+	else let val l = splitMul(n div 10000) in l @ [n mod 10000] end
+
+fun singleMultiply(x::A,y::B) = if (x*y = 0) then [0] else splitMul(x*y)
+
+fun sublist ([],len,cur) = ([],[])
+	| sublist(x::A,len,cur) = 
+		let val (m,n) = sublist(A,len,cur+1)
+		in if (cur< (len div 2)) then (x::m,n) else (m,x::n)
+		end
+
+fun reverse [] = []
+	| reverse (x::l) = 
+		let val l = reverse  l in l @ [x] end
+
+fun bigger([],[]) = true
+	| bigger(x::A,y::B) = 
+		if (x = y) then bigger(A,B) 
+		else if (x>y) then true 
+			 else false
+
+fun act([],[],diff) = []
+	| act (x::A,y::B,diff) =
+		let val l = if diff=1 then 
+							  if (x-1)<y then act(A,B,1) else act(A,B,0) 
+					else if x<y then act(A,B,1) else act(A,B,0) 
+		in if diff=1 then 
+					  if (x-1)<y then l @ [(10000+(x-1-y))] else l @ [(x-1-y)]
+			else if x<y then l @ [(10000+(x-y))] else l @ [(x-y)]
+		end   
+
+fun pad n = if n=0 then [] 
+			else 0 :: pad(n-1)
+
+fun add([],[],cy) = if (cy=0) then [] else [cy]                             	        (*ADD pass two reversed lists*)
+	| add(x::A,y::B,cy) = 
+		let val l = add(A,B,(x+y+cy) div 10000) in l @ [(x+y+cy) mod 10000 ] end
+
+fun sub(A,B) = if (bigger(A,B)) then (0,act(reverse(A),reverse(B),0)) else (1,act(reverse(B),reverse(A),0))
 
 fun equated(A,B,C) = 
 	let
@@ -43,4 +91,18 @@ fun multiply (A,B,l) =
 			 	  end
 		 	  end
 
+fun trim [] = []
+	| trim [0] = [0]
+	| trim (x::A) = let
+						val trimmed = if ( x <> 0 ) then A else trim A
+					in
+						if (x <> 0) then x::trimmed else trimmed
+					end
 
+(*---------------------------------------------------------------------------------------------*)
+
+fun karatsuba A B = 
+let val l1=length(A) and l2=length(B) 
+in if(l1>l2) then trim (multiply (A,makeEqual(B,l1-l2),l1))
+		else trim (multiply (makeEqual(A,l2-l1),B,l2))
+end
