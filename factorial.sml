@@ -18,8 +18,17 @@ fun fromString s =
 		end
 	end
 
+fun rem [] = ""
+	| rem (x::[]) = Int.toString(x)
+	| rem (x::l) =  if (x = 0) then rem (l) ^ "0000" else
+					if ( x div 10 = 0 ) then rem (l) ^ "000" ^ Int.toString(x) else 
+					if ( x div 100 = 0 ) then rem (l) ^ "00" ^ Int.toString(x) else 
+					if ( x div 1000 = 0 ) then rem (l) ^ "0" ^ Int.toString(x) else 
+						rem (l) ^ Int.toString(x)
 
-
+fun toString [] = ""
+	| toString (l) = rem( reverse (l));
+ 
 fun create ([],cur,inc)=[]
 	| create (l,cur,inc) = 
 		let
@@ -41,11 +50,11 @@ fun factorial str =
 		val (v1,v2) = (make(fromString(str),[1]))	 
 		val n = if ( v1 = [0] ) then [] else create (v1,v2,v2)
 	in
-		if (v1 = [0]) then [1]
+		if (v1 = [0]) then "1"
 		else
 			let
 				val applied = apply(n,v2)
 			in
-				applied
+				toString (applied)
 			end	
 	end
