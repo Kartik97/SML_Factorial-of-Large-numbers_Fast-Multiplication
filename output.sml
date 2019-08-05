@@ -4,6 +4,6 @@ fun printToOutStream outstream str = let val os = outstream
                                        TextIO.closeOut os
                                      end;
 
-val os = TextIO.openOut "C:/programs/testfile.txt";
+val os = TextIO.openOut "res.txt";
 
-printToOutStream os "Hello SML IO";
+printToOutStream os it;
