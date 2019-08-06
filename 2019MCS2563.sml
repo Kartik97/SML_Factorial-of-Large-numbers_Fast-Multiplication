@@ -110,7 +110,7 @@ fun singleMultiply([x],[y]) = if (x*y = 0) then [0]
 *)
 fun makeEqual (l,x) = if x>0 then makeEqual(0::l,x-1) else l 
 
-(*	make function : Used to make the length of two lists equal by adding zeros at the front of the shorter list
+(*	make function : Used to make the length of two lists equal by adding zeros at the front of the shorter list in a way that the equivalent number remains the same
 	Input = A tuple of two lists in reversed order.
 	Ouput = A tuple with equal length lists. Output lists are also in reversed order.
 *)
