@@ -113,12 +113,12 @@ fun apply ([],start) = start
 		 	val temp = f start
 		 in
 		 	apply (rest,temp)
-		 end 
+		 end
 
 fun factorial str =
 	let
 		val strConverted = fromString(str)	 
-		val functions = if ( strConverted = [0] ) then [] else create (strConverted,[1])
+		val functions = if ( strConverted = [0] ) then [] else create (List.rev(strConverted),[1])
 	in
 		if (strConverted = [0]) then "1"
 		else
