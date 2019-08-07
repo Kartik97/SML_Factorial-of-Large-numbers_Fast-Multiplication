@@ -178,7 +178,7 @@ fun multiply (A,B) =
 *) 
 fun karatsuba A B = trim(List.rev(multiply(List.rev(A),List.rev(B))))
 
-fun karatsuba2 A B = (multiply(A,B))
+fun karatsuba2 A B = List.rev(trim(List.rev(multiply(A,B))))
 
 (*  create function : Used to create a list of function of karatsuba from 1 to n for computing the factorial
   Input = A list, current value of the number whose karatsuba function is to be created
@@ -216,7 +216,7 @@ fun factorial str =
     if (strConverted = [0]) then "1"
     else
       let
-        val applied = List.rev(apply(functions,[1]))
+        val applied = (apply(functions,[1]))
       in
         toString (applied)
       end 
