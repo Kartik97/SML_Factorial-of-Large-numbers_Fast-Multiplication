@@ -187,7 +187,7 @@ fun create ([],cur)=[]
     let
       val cmp = sub (no, cur,0)
     in
-      if (trim(cmp) = [0] ) then [karatsuba (List.rev(cur))] else (karatsuba cur) :: create(no,add(cur,[1],0))
+      if (trim(cmp) = [0] ) then [karatsuba (List.rev(no))] else (karatsuba List.rev(cur)) :: create(no,add(cur,[1],0))
     end
 
 (*  apply function : Applies values to the list of karatsuba functions
