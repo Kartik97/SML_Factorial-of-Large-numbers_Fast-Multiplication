@@ -165,7 +165,7 @@ fun multiply (A,B) =
           end
   end
 
-(*  karatsuba : Function implementing karatsuba algorithm
+(*  karatsuba : Function implementing karatsuba algorithm. Function will return [] if any of the inputs is []
   Input = Two lists of numbers in normal order.
   Output = Single list in normal order representing the product of the above numbers
 *)
@@ -198,7 +198,7 @@ fun apply ([],start) = start
       apply (rest,temp)
      end
 
-(*  factorial function : Fucntion for computing the factorial of a number
+(*  factorial function : Fucntion for computing the factorial of a number. Funtion will return "" for input "".
   Input = Number in string form whose factorial is to be calculated
   Ouput = Resultant factorial in string form
 *)
