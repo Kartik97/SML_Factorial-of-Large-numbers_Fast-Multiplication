@@ -170,7 +170,10 @@ fun multiply (A,B) =
   Input = Two lists of numbers in normal order.
   Output = Single list in normal order representing the product of the above numbers
 *)
-fun karatsuba A B = trim(List.rev(multiply(List.rev(A),List.rev(B))))
+fun karatsuba [] [] = []
+    | karatsuba [] _ = []
+    | karatsuba _ [] = []
+    | karatsuba A B = trim(List.rev(multiply(List.rev(A),List.rev(B))))
 
 (*  create function : Used to create a list of function of karatsuba from 1 to n for computing the factorial
   Input = A list, current value of the number whose karatsuba function is to be created
