@@ -110,13 +110,6 @@ fun singleMultiply([x],[y]) = if (x*y = 0) then [0]
 *)
 fun makeEqual (l,x) = if x>0 then makeEqual(0::l,x-1) else l 
 
-(*  make function : Used to make the length of two lists equal by adding zeros at the front of the shorter list in a way that the equivalent number remains the same
-  Input = A tuple of two lists in reversed order.
-  Ouput = A tuple with equal length lists. Output lists are also in reversed order.
-*)
-fun make(A,B) = if (length A > length B) then (A,List.rev(makeEqual (List.rev(B),length(A)-length(B)))) 
-        else (List.rev(makeEqual (List.rev(A),length(B)-length(A))),B)
-
 (*  final function : Used for the combining the result of the divided lists by the multiply function
   Input = Three lists and the length of the original list in the multiply function
   Output = Final product of the three lists in accordance with the karatsuba algorithm
