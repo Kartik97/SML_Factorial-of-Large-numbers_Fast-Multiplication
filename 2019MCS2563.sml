@@ -9,26 +9,6 @@
 (* Exception *)
 exception Invalid_Input_exception of string
 
-(*	fromString function : Takes a string as input and converts the string into list of base 10^4 numbers
-	Input = A string
-	Output = String converted into list of base 10^4 numbers in normal order
-*)
-fun fromString s = 
-	let val l = explode(s)
-	in let fun convert []=[]
-				| convert (x::rest) = let val intlist = convert(rest) 
-									  in if ord(x)>=48 andalso ord(x)<=57 then (ord(x)-48)::intlist else raise (Invalid_Input_exception (s))
-									  end
-
-			fun base4 [] = []
-				| base4(x::[]) = [x]
-				| base4(x::y::[]) = [x+y*10]
-				| base4(x::y::z::[]) = [x+y*10+z*100]
-				| base4(x::y::z::k::l) = let val equalbase = base4(l) in (x+y*10+z*100+k*1000)::equalbase end
-		in List.rev(base4(List.rev(convert(l))))
-		end
-	end
-
 (*	trim function : Removes leading zeros from a list of numbers
 	Input = A list of numbers
 	Output = List of numbers without leading zeros
@@ -40,6 +20,26 @@ fun trim [] = []
 					in
 						if (x <> 0) then x::trimmed else trimmed
 					end
+
+(*	fromString function : Takes a string as input and converts the string into list of base 10^4 numbers
+	Input = A string
+	Output = String converted into list of base 10^4 numbers in normal order
+*)
+fun fromString s = 
+	let val l = explode(s)
+	in let fun convert []=[]
+				| convert (x::rest) = let val intlist = convert(rest) 
+									  in if ord(x)>=48 andalso ord(x)<=57 then (ord(x)-48)::intlist else raise (Invalid_Input_exception(s))
+									  end
+
+			fun base4 [] = []
+				| base4(x::[]) = [x]
+				| base4(x::y::[]) = [x+y*10]
+				| base4(x::y::z::[]) = [x+y*10+z*100]
+				| base4(x::y::z::k::l) = let val equalbase = base4(l) in (x+y*10+z*100+k*1000)::equalbase end
+		in trim(List.rev(base4(List.rev(convert(l)))))
+		end
+	end
 
 (*	toString funtion : Takes a list of base 10^4 numbers and converts them into a string
 	Input = A list of base 10^4 numbers in normal order

@@ -6,4 +6,4 @@ fun printToOutStream outstream str = let val os = outstream
 
 val os = TextIO.openOut "res.txt";
 
-printToOutStream os it;
+printToOutStream os res;
