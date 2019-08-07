@@ -26,8 +26,7 @@ fun trim [] = []
   Output = String converted into list of base 10^4 numbers in normal order
 *)
 fun fromString s = 
-  if s="" then raise (Invalid_Input_exception(s))
-  else  let val l = explode(s)
+    let val l = explode(s)
     in let fun convert []=[]
           | convert (x::rest) = let val intlist = convert(rest) 
                       in if ord(x)>=48 andalso ord(x)<=57 then (ord(x)-48)::intlist else raise (Invalid_Input_exception(s))
@@ -206,9 +205,12 @@ fun apply ([],start) = start
 fun factorial str =
   let
     val strConverted = fromString(str)   
-    val functions = if ( strConverted = [0] ) then [] else create (List.rev(strConverted),[1])
+    val functions = if ( strConverted = [0] ) then [] 
+                    else if ( strConverted = [] ) then [] 
+                    else create (List.rev(strConverted),[1])
   in
     if (strConverted = [0]) then "1"
+    else if (strConverted = []) then ""
     else
       let
         val applied = apply(functions,[1])
