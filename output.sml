@@ -1,3 +1,4 @@
+val res=it
 fun printToOutStream outstream str = let val os = outstream
                                      in
                                        TextIO.output(os,str);
