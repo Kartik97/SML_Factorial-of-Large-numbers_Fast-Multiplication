@@ -26,20 +26,21 @@ fun trim [] = []
   Output = String converted into list of base 10^4 numbers in normal order
 *)
 fun fromString s = 
-  let val l = explode(s)
-  in let fun convert []=[]
-        | convert (x::rest) = let val intlist = convert(rest) 
-                    in if ord(x)>=48 andalso ord(x)<=57 then (ord(x)-48)::intlist else raise (Invalid_Input_exception(s))
-                    end
+  if s="" then raise (Invalid_Input_exception(s))
+  else  let val l = explode(s)
+    in let fun convert []=[]
+          | convert (x::rest) = let val intlist = convert(rest) 
+                      in if ord(x)>=48 andalso ord(x)<=57 then (ord(x)-48)::intlist else raise (Invalid_Input_exception(s))
+                      end
 
-      fun base4 [] = []
-        | base4(x::[]) = [x]
-        | base4(x::y::[]) = [x+y*10]
-        | base4(x::y::z::[]) = [x+y*10+z*100]
-        | base4(x::y::z::k::l) = let val equalbase = base4(l) in (x+y*10+z*100+k*1000)::equalbase end
-    in trim(List.rev(base4(List.rev(convert(l)))))
+        fun base4 [] = []
+          | base4(x::[]) = [x]
+          | base4(x::y::[]) = [x+y*10]
+          | base4(x::y::z::[]) = [x+y*10+z*100]
+          | base4(x::y::z::k::l) = let val equalbase = base4(l) in (x+y*10+z*100+k*1000)::equalbase end
+      in trim(List.rev(base4(List.rev(convert(l)))))
+      end
     end
-  end
 
 (*  toString funtion : Takes a list of base 10^4 numbers and converts them into a string
   Input = A list of base 10^4 numbers in normal order
