@@ -171,8 +171,8 @@ fun multiply (A,B) =
   Output = Single list in normal order representing the product of the above numbers
 *)
 fun karatsuba [] [] = []
-    | karatsuba [] _ = []
-    | karatsuba _ [] = []
+    | karatsuba [] B = []
+    | karatsuba A [] = []
     | karatsuba A B = trim(List.rev(multiply(List.rev(A),List.rev(B))))
 
 (*  create function : Used to create a list of function of karatsuba from 1 to n for computing the factorial
